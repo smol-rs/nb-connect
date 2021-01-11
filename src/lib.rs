@@ -52,6 +52,9 @@ use {
     winapi::um::ws2tcpip::socklen_t,
 };
 
+#[cfg(feature = "vsock")]
+use vsock::VsockStream;
+
 /// A raw socket address.
 struct Addr {
     storage: sockaddr_storage,
@@ -230,6 +233,50 @@ pub fn unix<P: AsRef<Path>>(path: P) -> io::Result<UnixStream> {
 
     let fd = connect(addr, libc::AF_UNIX, 0)?;
     unsafe { Ok(UnixStream::from_raw_fd(fd)) }
+}
+
+/// Creates a pending VSOCK connection to the specified path.
+///
+/// The returned stream will be in non-blocking mode and in the process of connecting to the
+/// specified CID/port.
+///
+/// The stream becomes writable when connected.
+///
+/// # Examples
+///
+/// ```no_run
+/// use polling::{Event, Poller};
+/// use std::time::Duration;
+///
+/// // Create a pending VSOCK connection.
+/// let stream = nb_connect::vsock(1, 9999)?;
+///
+/// // Create a poller that waits for the stream to become writable.
+/// let poller = Poller::new()?;
+/// poller.add(&stream, Event::writable(0))?;
+///
+/// // Wait for at most 1 second.
+/// if poller.wait(&mut Vec::new(), Some(Duration::from_secs(1)))? == 0 {
+///     println!("timeout");
+/// } else {
+///     println!("connected");
+/// }
+/// # std::io::Result::Ok(())
+/// ```
+#[cfg(all(unix, feature = "vsock"))]
+pub fn vsock(cid: u32, port: u32) -> io::Result<VsockStream> {
+    let addr = unsafe {
+        let mut addr = mem::zeroed::<libc::sockaddr_vm>();
+        addr.svm_cid = cid;
+        addr.svm_port = port;
+        Addr::from_raw_parts(
+            &addr as *const _ as *const _,
+            mem::size_of::<libc::sockaddr_vm>() as u32,
+        )
+    };
+
+    let fd = connect(addr, libc::AF_VSOCK, 0)?;
+    unsafe { Ok(VsockStream::from_raw_fd(fd)) }
 }
 
 /// Creates a pending TCP connection to the specified address.
