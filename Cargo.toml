@@ -16,7 +16,7 @@ categories = ["asynchronous", "network-programming", "os"]
 readme = "README.md"
 
 [dependencies]
-socket2 = { version = "0.4.0-alpha.2", features = ["all"] }
+socket2 = { version = "0.3.19", features = ["unix"] }
 
 [target."cfg(unix)".dependencies]
 libc = "0.2.77"
