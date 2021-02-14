@@ -15,11 +15,11 @@ keywords = ["TcpStream", "UnixStream", "socket2", "polling"]
 categories = ["asynchronous", "network-programming", "os"]
 readme = "README.md"
 
+[dependencies]
+socket2 = { version = "0.3.19", features = ["unix"] }
+
 [target."cfg(unix)".dependencies]
 libc = "0.2.77"
-
-[target.'cfg(windows)'.dependencies]
-winapi = { version = "0.3.9", features = ["handleapi", "ws2tcpip"] }
 
 [dev-dependencies]
 polling = "2.0.0"
