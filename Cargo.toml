@@ -1,6 +1,6 @@
 [package]
 name = "nb-connect"
-version = "1.0.2"
+version = "1.0.3"
 authors = [
   "Stjepan Glavina <stjepang@gmail.com>",
   "Jayce Fayne <jayce.fayne@mailbox.org>",
