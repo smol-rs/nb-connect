@@ -15,7 +15,7 @@ keywords = ["TcpStream", "UnixStream", "socket2", "polling"]
 categories = ["asynchronous", "network-programming", "os"]
 
 [dependencies]
-socket2 = { version = "0.3.19", features = ["unix"] }
+socket2 = { version = "0.4.0", features = ["all"] }
 
 [target."cfg(unix)".dependencies]
 libc = "0.2.77"
