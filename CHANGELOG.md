@@ -1,3 +1,7 @@
+# Version 1.0.4
+
+- Update `socket2` dependency to 0.4.
+
 # Version 1.0.3
 
 - Fix invalid assumption of `std::net::SocketAddrV{4,6}` layout.
