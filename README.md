@@ -1,4 +1,4 @@
-# nb-connect
+# nb-connect (deprecated)
 
 [![Build](https://github.com/smol-rs/nb-connect/workflows/Build%20and%20test/badge.svg)](
 https://github.com/smol-rs/nb-connect/actions)
@@ -8,6 +8,8 @@ https://github.com/smol-rs/nb-connect)
 https://crates.io/crates/nb-connect)
 [![Documentation](https://docs.rs/nb-connect/badge.svg)](
 https://docs.rs/nb-connect)
+
+**This crate is now deprecated in favor of [socket2](https://crates.io/crates/socket2).**
 
 Non-blocking TCP or Unix connect.
 
