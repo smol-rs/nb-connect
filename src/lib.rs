@@ -31,6 +31,10 @@
 //! ```
 
 #![warn(missing_docs, missing_debug_implementations, rust_2018_idioms)]
+#![deprecated(
+    since = "1.2.0",
+    note = "This crate is now deprecated in favor of [socket2](https://crates.io/crates/socket2)."
+)]
 
 use std::io;
 use std::net::{SocketAddr, TcpStream};

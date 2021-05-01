@@ -1,3 +1,7 @@
+# Version 1.2.0
+
+- **This crate is now deprecated in favor of [socket2](https://crates.io/crates/socket2).**
+
 # Version 1.1.0
 
 - Increase MSRV to rustc 1.46.
